@@ -6,13 +6,13 @@ const { user } = require('pg/lib/defaults')
 
 // models import
 
-// const user = require('../models/user.js')
+const User = require('../models/user')
 
 router.post('/register', async(req,res) => {
     try{
         const salt = await bycrypt.genSalt()
         const hashed = await bycrypt.hash(req.body.password, salt)
-        // await User.create({...req.body, password: hashed})
+        await User.create({...req.body, password: hashed})
         res.status(201).json({message: 'User successfully recreated'})
     } catch (err) {
         res.status(500).json({err})
@@ -21,7 +21,7 @@ router.post('/register', async(req,res) => {
 
 router.post('/login', async(req, res) => {
     try{
-        // const user = await user.findbyemail(req.body.email)
+        const user = await User.findByEmail(req.body.email)
         if (!user){
             throw new Error("No user with this email")
         }
