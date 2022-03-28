@@ -1,5 +1,9 @@
 const db = require('../dbConfig/init');
-
+const dayjs = require('dayjs');
+const dayOfYear = require('dayjs/plugin/dayOfYear');
+const weekOfYear = require('dayjs/plugin/weekOfYear');
+dayjs.extend(dayOfYear);
+dayjs.extend(weekOfYear);
 
 class Habit {
 	constructor(data) {
@@ -70,9 +74,92 @@ class Habit {
 			}
 		});
 	}
-
 	
-/*delete a habit*/
+//function to get streaks, see their most recent completion streak
+	static getPeriods(completionDates, frequency, frequencyTarget) {
+		let today = dayjs(new Date());
+		let dates = [];
+
+		if (completionDates.length === 0) {
+			return {
+				bestPeriod: 0,
+				currentPeriod: 0,
+				currentCompletions: 0,
+			};
+		}
+
+		if (frequency === 'hourly') {
+			today = today.dayOfYear();
+			dates = completionDates.map((date) => dayjs(date).dayOfYear());
+		}
+		if (frequency === 'daily') {
+			today = today.week();
+			dates = completionDates.map((date) => dayjs(date).week());
+		}
+		if (frequency === 'weekly') {
+			today = today.month();
+			dates = completionDates.map((date) => dayjs(date).month());
+		}
+		const datesLength = dates.length;
+
+		if (Math.abs(today - dates[datesLength - 1]) > 1) {
+			return {
+				bestPeriod: 0,
+				currentPeriod: 0,
+				currentCompletions: 0,
+			};
+		}
+		const fullDatesData = dates.reduce(
+			(acc, curr) => {
+				if (curr === acc[acc.length - 1].day) {
+					acc[acc.length - 1].count++;
+				} else {
+					acc.push({
+						day: curr,
+						count: 1,
+					});
+				}
+				return acc;
+			},
+			[
+				{
+					day: dates[0],
+					count: 0,
+				},
+			]
+		);
+		const datesData = fullDatesData
+			.filter((day) => day.count >= frequencyTarget)
+			.map((date) => date.day);
+
+		let currentPeriod = 1;
+		let bestPeriod = 1;
+		let previousDate = datesData[0];
+
+		for (let i = 1; i < datesData.length; i++) {
+			if (Math.abs(previousDate - datesData[i]) === 1) {
+				currentPeriod++;
+				if (currentPeriod > bestPeriod) {
+					bestPeriod = currentPeriod;
+				}
+			} else {
+				currentPeriod = 1;
+			}
+			previousDate = datesData[i];
+		}
+		let currentCompletions = 0;
+
+		if (today === fullDatesData[fullDatesData.length - 1].day) {
+			currentCompletions = fullDatesData[fullDatesData.length - 1].count;
+		}
+		return {
+			bestPeriod,
+			currentPeriod,
+			currentCompletions,
+		};
+	}
+
+	//delete a habit
 	destroyHabit() {
 		return new Promise(async (resolve, reject) => {
 			try {
@@ -84,9 +171,25 @@ class Habit {
 			}
 		});
 	}
-//function to get streaks//
-	static getPeriods(completionDates, frequency, frequencyTarget) {
 
-}
+//mark a habit as complete for the day 
+	markAsComplete() {
+		return new Promise(async (res, rej) => {
+			try {
+				const today = new Date();
+				const todaysDate = `${today.getFullYear()}-${(today.getMonth() + 1)
+					.toString()
+					.padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+
+				const result = await db.query(
+					'INSERT INTO completions (completion_date, habit_id) VALUES ($1, $2) RETURNING *;',
+					[todaysDate, this.id]
+				);
+				res(result.rows[0]);
+			} catch (err) {
+				rej(err);
+			}
+		});
+	}
 }
 module.exports = Habit;
