@@ -13,10 +13,7 @@ CREATE TABLE habits (
     habit_name varchar(255) NOT NULL,
     habit_description varchar(500) NOT NULL, 
     habit_frequency int NOT NULL,
-    frequency_target int NOT NULL 
-    -- FOREIGN KEY(email), 
-    -- REFERENCES users(email) 
-    frequency_target int NOT NULL, 
+    frequency_target int NOT NULL  
     FOREIGN KEY(email) REFERENCES users(email) 
 );
 

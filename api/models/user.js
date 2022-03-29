@@ -46,6 +46,20 @@ class User {
         });
     };
 
+	//get all users
+	static get all(){ 
+        return new Promise (async (resolve, reject) => {
+            try {
+                // console.log(db);
+                const result = await db.query('SELECT * FROM users;')
+                const users = result.rows.map(u => ({ id: u.id, username: u.username }))
+                resolve(users);
+            } catch (err) {
+                reject("Error retrieving users")
+            }
+        })
+    };
+
 }
 
 module.exports = User;
