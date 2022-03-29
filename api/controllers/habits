@@ -9,7 +9,6 @@ const verifyToken = require('../middleware/middleware')
 
 
 
-<<<<<<< HEAD
 // get all the habits for each user/email 
 router.get('/', verifyToken, async (req, res) => {
 	try {
@@ -20,10 +19,7 @@ router.get('/', verifyToken, async (req, res) => {
 	}
 });
 
-//get a specific habit
-=======
 //get a specific habit by id
->>>>>>> c590ff2e1c9bfb7073335b1f4108468c481ae11c
 router.get('/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
