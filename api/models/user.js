@@ -15,7 +15,7 @@ class User {
                 const users = usersData.rows.map(d => new User(d))
                 resolve(users);
             } catch (err) {
-                reject("Error retrieving authors")
+                reject("Error retrieving users")
             }
         })
     }

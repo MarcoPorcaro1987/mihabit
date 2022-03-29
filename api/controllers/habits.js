@@ -33,7 +33,7 @@ router.get('/:id', verifyToken, async (req, res) => {
 // Create habits
 router.post('/', verifyToken, async (req, res) => {
 	try {
-		const habit = await Habit.create({ ...req.body, email: req.email });
+		const habit = await Habit.create({ email: req.body.email, habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target });
 		res.status(201).json(habit); 
 	} catch (err) {
 		res.status(500).send({ err });

@@ -22,5 +22,14 @@ router.get('/', verifyToken, async function index(req, res) {
     }
 })
 
+router.get('/:id', verifyToken, async function users(req, res) {
+    try {
+        const users = await User.users
+        res.status(200).json(users);
+    } catch (err) {
+        res.status(404).send(err);
+    }
+})
+
 module.exports = router
 
