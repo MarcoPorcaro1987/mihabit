@@ -4,9 +4,23 @@ const router = express.Router();
 
 const Habit = require('../models/habit');
 const User = require('../models/user');
+const verifyToken = require('../middleware/middleware')
+
+
+
+
+// get all the habits for each user/email 
+router.get('/', verifyToken, async (req, res) => {
+	try {
+		const habits = await Habit.findByEmail(req.email);
+		res.status(200).json(habits); 
+	} catch (err) {
+		res.status(500).send({ err });
+	}
+});
 
 //get a specific habit by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', verifyToken, async (req, res) => {
 	try {
 		const { id } = req.params;
 		const habit = await Habit.findById(id);
@@ -17,9 +31,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create habits
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
 	try {
-		const habit = await Habit.create({ ...req.body, email: req.email });
+		const habit = await Habit.create({ email: req.body.email, habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target });
 		res.status(201).json(habit); 
 	} catch (err) {
 		res.status(500).send({ err });
@@ -27,7 +41,7 @@ router.post('/', async (req, res) => {
 });
 
 // Delete habits
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken,  async (req, res) => {
 	try {
 		const habit = await Habit.findById(req.params.id);
 		await habit.destroyHabit();
@@ -42,7 +56,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 //check if a habit is complete
-router.get('/:id/complete', async (req, res) => {
+router.get('/:id/complete', verifyToken, async (req, res) => {
 	try {
 		const habit = await Habit.findById(req.params.id);
 		const resp = await habit.isComplete;
@@ -53,7 +67,7 @@ router.get('/:id/complete', async (req, res) => {
 });
 
 // mark as complete 
-router.post('/:id/complete', async (req, res) => {
+router.post('/:id/complete', verifyToken, async (req, res) => {
 	try {
 		const habit = await Habit.findById(req.params.id);
 		const resp = await habit.markAsComplete();

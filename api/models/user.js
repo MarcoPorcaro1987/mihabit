@@ -4,8 +4,22 @@ class User {
 	constructor(data) {
 		this.email = data.email;
 		this.userName = data.userName;
-		this.password= data.password;
+		this.password= data.password_digest;
 	}
+
+// get all users
+	static get all() {
+        return new Promise (async (resolve, reject) => {
+            try {
+                const usersData = await db.query(`SELECT * FROM users;`)
+                const users = usersData.rows.map(d => new User(d))
+                resolve(users);
+            } catch (err) {
+                reject("Error retrieving users")
+            }
+        })
+    }
+	
 // create user
 	static create({ email, userName, password }) {
 		return new Promise(async (res, rej) => {
@@ -26,7 +40,9 @@ class User {
 		return new Promise(async (res, rej) => {
 			try {
 				let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
+				console.log(result)
 				let user = new User(result.rows[0]);
+				console.log(user)
 				res(user);
 			} catch (err) {
 				rej(`Error retrieving user: ${err}`);
@@ -44,6 +60,20 @@ class User {
                 reject("User could not be found");
             };
         });
+    };
+
+	//get all users
+	static get all(){ 
+        return new Promise (async (resolve, reject) => {
+            try {
+                // console.log(db);
+                const result = await db.query('SELECT * FROM users;')
+                const users = result.rows.map(u => ({ id: u.id, username: u.username }))
+                resolve(users);
+            } catch (err) {
+                reject("Error retrieving users")
+            }
+        })
     };
 
 }

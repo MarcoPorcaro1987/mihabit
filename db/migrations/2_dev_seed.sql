@@ -11,7 +11,7 @@ VALUES
     ('sleeping','sleep 8 hours daily', 'daily', 7, 'freezer@dg.dk'),
     ('playing football', 'playing football 4 times a week', 'weekly', 4, 'kakarrot@go.ku');
 
-INSERT INTO habits (completion_date, habit_id)
+INSERT INTO completions (completion_date, habit_id)
 VALUES
     ('15-03-2022', 4),
     ('09-03-2022', 3),

@@ -4,11 +4,13 @@ const router = express.Router()
 
 const jwt = require('jsonwebtoken')
 const bycrypt = require('bcryptjs')
-const { user } = require('pg/lib/defaults')
+// const { user } = require('pg/lib/defaults')
 
+
+const { verifyToken } = require('../middleware/middleware');
 // models import
 
-const User = require('../models/user.js')
+const User = require('../models/user')
 
 // password hashing when registering
 router.post('/register', async (req, res) => {
@@ -25,8 +27,12 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findByEmail(req.body.email)
+        console.log(user)
         if (!user) { throw new Error('No user with this email') }
-        const authed = bcrypt.compare(req.body.password, user.passwordDigest)
+        console.log(req.body.password)
+        console.log(user.password)
+        const authed =  await bycrypt.compare(req.body.password, user.password)
+        
         if (!!authed) {
             jwt.sign({username: user.username, email: user.email}, process.env.SECRET_KEY, { expiresIn: '30m' }, (err, token) => {
                 if (err) {
@@ -38,6 +44,7 @@ router.post('/login', async (req, res) => {
                     })
                 }
             })
+            
         } else {
             throw new Error('User could not be authenticated')
         }
@@ -46,7 +53,14 @@ router.post('/login', async (req, res) => {
     }
 })
 
-//generating of jsonwebtokens
+module.exports = router;
+
+
+
+
+
+
+
 
 // router.post('/login', async (req, res) => {
 //     try {
