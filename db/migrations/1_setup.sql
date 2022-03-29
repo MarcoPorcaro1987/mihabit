@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-    id serial,
-    email varchar(100) PRIMARY KEY,
-    username varchar(255) NOT NULL UNIQUE,
+    id serial PRIMARY KEY,
+    email varchar(100) NOT NULL,
+    username varchar(255) NOT NULL,
     password_digest varchar(500) NOT NULL
 );
 
@@ -13,8 +13,9 @@ CREATE TABLE habits (
     habit_description varchar(500) NOT NULL, 
     habit_frequency varchar(200) NOT NULL,
     frequency_target int NOT NULL, 
-    email varchar(100) NOT NULL, 
-    FOREIGN KEY(email) REFERENCES users(email) 
+    user_id int
+    -- email varchar(100) NOT NULL, 
+    -- FOREIGN KEY(email) REFERENCES users(email) 
 );
 
 DROP TABLE IF EXISTS completions;
