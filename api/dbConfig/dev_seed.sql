@@ -4,14 +4,14 @@ VALUES
 ('majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
 ('freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' );
 
-INSERT INTO habits (habit_description, habit_frequency, frequency_target, email )
+INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target, email )
 VALUES
-    ('walking', 4, 3, 'kakarrot@go.ku'),
-    ('swimming', 3, 6, 'majin@buu.com'),
-    ('sleeping', 7, 8, 'freezer@dg.dk'),
-    ('playing football', 5, 4, 'kakarrot@go.ku');
+    ('walking','walking 30 min daily','daily', 4, 'kakarrot@go.ku'),
+    ('swimming','swiming one hour daily','daily', 3, 'majin@buu.com'),
+    ('sleeping','sleep 8 hours daily', 'daily', 7, 'freezer@dg.dk'),
+    ('playing football', 'playing football 4 times a week', 'weekly', 4, 'kakarrot@go.ku');
 
-INSERT INTO habits (date, habit_id)
+INSERT INTO habits (completion_date, habit_id)
 VALUES
     ('15-03-2022', 4),
     ('09-03-2022', 3),
