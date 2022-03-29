@@ -12,5 +12,6 @@ services:
     image: postgres:12.4
     environment: 
       - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=habitpass
     volumes:
       - "./db/migrations:/docker-entrypoint-initdb.d/:ro"
