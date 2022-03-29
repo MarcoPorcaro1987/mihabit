@@ -92,3 +92,16 @@ async function requestRegistration(e) {
         console.warn(err);
     }
 }
+
+function login(data) {
+    localStorage.setItem('token', data.token)
+    let userInfo = jwt_decode(data.token);
+    localStorage.setItem('email', userInfo.email)
+    localStorage.setItem('username', userInfo.username);
+    location.hash = '#feed'; //unsure if correct
+}
+
+function logout() {
+    localStorage.clear();
+    location.hash = '#login'
+}
