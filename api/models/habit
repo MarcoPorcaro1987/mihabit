@@ -14,7 +14,31 @@ class Habit {
 		this.currentCompletions = data.currentCompletions;
         this.completionDates = data.completionDates;
 	}
-/*create habit*/
+
+
+//show all habits
+	static get all() {
+		return new Promise(async (res, rej) => {
+			try {
+				let result = await db.query(`SELECT habits.*, users.username as username
+												FROM habits
+												JOIN users ON `)
+
+				headers: {
+					Authorization: `Bearer: ${localStorage.getItem('token')}`
+				}
+
+			} catch (err) {
+				rej(`Error retrieving habits: ${ err }`)
+			}
+		})
+		
+	}
+
+
+
+
+//create habit
 	static create({ email, name, description, frequency, goal }) {
 		return new Promise(async (res, rej) => {
 			try {
@@ -39,7 +63,7 @@ class Habit {
 	}
 
 	
-	// track a habit by id: to see if they have completed a habit for the day and see their most recent completion streak */
+	// track a habit by id: to see if they have completed a habit for the day and see their most recent completion streak 
 	static findById(id) {
 		return new Promise(async (res, rej) => {
 			try {
@@ -72,7 +96,7 @@ class Habit {
 	}
 
 	
-/*delete a habit*/
+//delete a habit
 	destroyHabit() {
 		return new Promise(async (resolve, reject) => {
 			try {
