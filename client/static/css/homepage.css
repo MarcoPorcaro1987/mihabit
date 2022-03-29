@@ -3,11 +3,11 @@
     margin: 0;
     padding: 0;
 }
-
 body{
     background-image: url("https://uploads-ssl.webflow.com/5d3aa39f8474c472841a7dfc/5ebcc59670fd035f273285f4_96818726_683701209084212_5551295202024488960_n%20(1)-min.jpg");
     background-size: cover;
 }
+
 header {
     height: 4.25rem;
     display: flex;
@@ -29,7 +29,7 @@ a{
     align-items: center;
 }
 
-.login-button {
+.logout-button {
     padding: 0.3125rem 0.625rem;
     background-color: lightcoral;
     border-radius: 0.625rem;
