@@ -1,5 +1,8 @@
 const User = require('../models/user')
 
+const express = require('express');
+const router = express.Router();
+
 router.get('/:email', async function show(req, res) {
     try {
         const user = await User.findByEmail(req.params.email)
@@ -17,3 +20,5 @@ router.get('/', async function index(req, res) {
         res.status(404).send(err);
     }
 })
+
+module.exports = router;
