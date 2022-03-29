@@ -4,7 +4,7 @@ const router = express.Router()
 
 const jwt = require('jsonwebtoken')
 const bycrypt = require('bcryptjs')
-const { user } = require('pg/lib/defaults')
+// const { user } = require('pg/lib/defaults')
 
 // models import
 
