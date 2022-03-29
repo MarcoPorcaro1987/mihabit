@@ -6,6 +6,20 @@ class User {
 		this.username = data.username;
 		this.passwordDigest = data.password_digest;
 	}
+
+// get all users
+	static get all() {
+        return new Promise (async (resolve, reject) => {
+            try {
+                const usersData = await db.query(`SELECT * FROM users;`)
+                const users = usersData.rows.map(d => new User(d))
+                resolve(users);
+            } catch (err) {
+                reject("Error retrieving authors")
+            }
+        })
+    }
+	
 // create user
 	static create({ username, email, passwordDigest }) {
 		return new Promise(async (res, rej) => {

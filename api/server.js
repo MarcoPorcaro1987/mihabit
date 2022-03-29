@@ -6,5 +6,7 @@ server.use(cors());
 server.use(express.json());
 
 server.get('/', (req, res) => res.send('Welcome to the jungle'))
+const userRoutes = require('./controllers/users')
 
+server.use('/users', userRoutes)
 module.exports = server
