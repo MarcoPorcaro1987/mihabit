@@ -9,6 +9,7 @@ const verifyToken = require('../middleware/middleware')
 
 
 
+<<<<<<< HEAD
 // get all the habits for each user/email 
 router.get('/', verifyToken, async (req, res) => {
 	try {
@@ -20,6 +21,9 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 //get a specific habit
+=======
+//get a specific habit by id
+>>>>>>> c590ff2e1c9bfb7073335b1f4108468c481ae11c
 router.get('/:id', async (req, res) => {
 	try {
 		const { id } = req.params;
@@ -56,8 +60,26 @@ router.delete('/:id', async (req, res) => {
 });
 
 //check if a habit is complete
+router.get('/:id/complete', async (req, res) => {
+	try {
+		const habit = await Habit.findById(req.params.id);
+		const resp = await habit.isComplete;
+		res.status(200).json({ ...habit, isComplete: resp });
+	} catch (err) {
+		res.status(404).send({ err: err.message });
+	}
+});
 
 // mark as complete 
-
+router.post('/:id/complete', async (req, res) => {
+	try {
+		const habit = await Habit.findById(req.params.id);
+		const resp = await habit.markAsComplete();
+		res.status(200).json(resp);
+	} catch (err) {
+		console.log(err.message);
+		res.status(404).send({ err: err.message });
+	}
+});
 
 module.exports = router;
