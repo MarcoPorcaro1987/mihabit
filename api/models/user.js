@@ -48,31 +48,34 @@ class User {
 		});
 	}
 //get users by id
-	get users(){
+	static findById(id){
         return new Promise (async (resolve, reject) => {
             try {
-                const usersData = await db.query(`SELECT * FROM users WHERE id = $1;`, [ this.id ]);
-                const users = usersData.rows.map(d => new User(d));
-                resolve(users);
+                const userData = await db.query('SELECT * FROM users WHERE id = $1;', [ id ]);
+                const user = userData.rows.map(d => new User(d));
+                resolve(user);
             } catch (err) {
                 reject("User could not be found");
             };
         });
     };
 
-	//get all users
-	static get all(){ 
-        return new Promise (async (resolve, reject) => {
-            try {
-                // console.log(db);
-                const result = await db.query('SELECT * FROM users;')
-                const users = result.rows.map(u => ({ id: u.id, username: u.username }))
-                resolve(users);
-            } catch (err) {
-                reject("Error retrieving users")
-            }
-        })
-    };
+
+
+
+	// //get all users
+	// static get all(){ 
+    //     return new Promise (async (resolve, reject) => {
+    //         try {
+    //             // console.log(db);
+    //             const result = await db.query('SELECT * FROM users;')
+    //             const users = result.rows.map(u => ({ id: u.id, username: u.username }))
+    //             resolve(users);
+    //         } catch (err) {
+    //             reject("Error retrieving users")
+    //         }
+    //     })
+    // };
 
 }
 
