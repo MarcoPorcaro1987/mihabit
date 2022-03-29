@@ -16,8 +16,8 @@ class Habit {
 	}
 
 
-//show all habits
-	static get all() {
+//show all habits for single user
+	static findByEmail(email) {
 		return new Promise(async (res, rej) => {
 			try {
 				let result = await db.query(`SELECT habits.*, users.username as username
