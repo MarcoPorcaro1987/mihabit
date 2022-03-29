@@ -34,7 +34,7 @@ async function requestLogin(e){
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: e
     }
     const r = await fetch('http://localhost:3000/auth/login', options)
     console.log(r)
