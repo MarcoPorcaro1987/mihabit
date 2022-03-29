@@ -18,6 +18,30 @@ class Habit {
 		this.currentCompletions = data.currentCompletions;
         this.completionDates = data.completionDates;
 	}
+
+
+//show all habits for single user
+static findByEmail(email) {
+	return new Promise(async (res, rej) => {
+		try {
+			headers: {
+				Authorization: `Bearer: ${localStorage.getItem('token')}`
+			}
+
+			const db = await initDB();
+			const habitData = await db.collection('habits').find({ userEmail: email }).toArray();
+			const habits = habitData.map(data => new Habit({ ...data, id: data._id }));
+			resolve(habits)
+
+			
+		} catch (err) {
+			rej(`Error retrieving habits for ${ email }`)
+		}
+	})
+	
+}
+
+
 /*create habit*/
 	static create({ email, name, description, frequency, goal }) {
 		return new Promise(async (res, rej) => {

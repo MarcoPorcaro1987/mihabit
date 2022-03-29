@@ -4,6 +4,20 @@ const router = express.Router();
 
 const Habit = require('../models/habit');
 const User = require('../models/user');
+const verifyToken = require('../middleware/middleware')
+
+
+
+
+// get all the habits for each user/email 
+router.get('/', verifyToken, async (req, res) => {
+	try {
+		const habits = await Habit.findByEmail(req.email);
+		res.status(200).json(habits); 
+	} catch (err) {
+		res.status(500).send({ err });
+	}
+});
 
 //get a specific habit by id
 router.get('/:id', async (req, res) => {
