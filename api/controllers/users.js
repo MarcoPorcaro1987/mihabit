@@ -21,17 +21,19 @@ async function show(req, res) {
     };
 }
 
-async function getUser(req, res){
-    try {
-        const user = await User.findById(parseInt(req.params.id))
-        console.log(user)
-        const habits = await user.habits
-        console.log(habits)
-        res.json(habits)
-    } catch(err) {
-        res.status(404).send({err}) 
-    }
-};
+module.exports = {index, show}
+
+// async function getUser(req, res){
+//     try {
+//         const user = await User.findById(parseInt(req.params.id))
+//         console.log(user)
+//         const habits = await user.habits
+//         console.log(habits)
+//         res.json(habits)
+//     } catch(err) {
+//         res.status(404).send({err}) 
+//     }
+// };
 
 // router.get('/:id/dogs', async (req, res) => {
 //     try {
@@ -66,5 +68,4 @@ async function getUser(req, res){
 
 
 
-module.exports = {index, show, getUser}
 
