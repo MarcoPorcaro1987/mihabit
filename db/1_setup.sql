@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id serial PRIMARY KEY,
-    email varchar(100) NOT NULL UNIQUE,
-    username varchar(255) NOT NULL UNIQUE,
+    email varchar(100) NOT NULL,
+    username varchar(255) NOT NULL,
     password_digest varchar(500) NOT NULL
 );
 
@@ -16,6 +16,8 @@ CREATE TABLE habits (
 );
     -- email varchar(100) NOT NULL
     -- FOREIGN KEY(email) REFERENCES users(email) 
+
+
 DROP TABLE IF EXISTS completions;
 CREATE TABLE completions (
     id serial PRIMARY KEY,
@@ -26,12 +28,12 @@ CREATE TABLE completions (
 
 
 
-INSERT INTO users (id, email, username, password_digest) 
+INSERT INTO users (email, username, password_digest) 
 VALUES
-(1, 'kakarrot@go.ku','Goku', 'tu9ibtoi4tbh2hhuet' ),
-(2, 'majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
-(3, 'freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' ),
-(4, 'lion@king.lk','Simba', 'aafadnthpqbsbapbb784' );
+('kakarrot@go.ku','Goku', 'tu9ibtoi4tbh2hhuet' ),
+('majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
+('freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' ),
+('lion@king.lk','Simba', 'aafadnthpqbsbapbb784' );
 
 INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target)
 VALUES
