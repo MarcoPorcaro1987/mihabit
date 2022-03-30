@@ -21,22 +21,22 @@ describe('users controller', () => {
         })
     });
 
-    // describe('show', () => {
-    //     test('it returns an user and their books with a 200 status code', async () => {
-    //         jest.spyOn(User, 'findById')
-    //             .mockResolvedValue(new User({ id: 1, name: 'Test User'} ));
-    //         jest.spyOn(User.prototype, 'books', 'get')
-    //             .mockResolvedValue(['book1', 'book2']);
+    describe('show', () => {
+        test('it returns an user and their habits with a 200 status code', async () => {
+            jest.spyOn(User, 'findById')
+                .mockResolvedValue(new User({ id: 1, username: 'Test User'} ));
+            jest.spyOn(User.prototype, 'habits', 'get')
+                .mockResolvedValue(['habit1', 'habit2']);
                 
-    //         const mockReq = { params: { id: 1 } }
-    //         await usersController.show(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(200);
-    //         expect(mockJson).toHaveBeenCalledWith({
-    //             id: 1,
-    //             name: 'Test Author',
-    //             books: ['book1', 'book2']
-    //         });
-    //     })
-    // });
+            const mockReq = { params: { id: 1 } }
+            await usersController.show(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(200);
+            expect(mockJson).toHaveBeenCalledWith({
+                id: 1,
+                username: 'Test Author',
+                habits: ['habit1', 'habit2']
+            });
+        })
+    });
     
 })

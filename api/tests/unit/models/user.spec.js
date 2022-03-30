@@ -18,16 +18,16 @@ describe('User', () => {
         })
     });
 
-    // describe('books', () => {
-    //     test('it resolves with formatted books on successful db query', async () => {
+    // describe('habits', () => {
+    //     test('it resolves with formatted habits on successful db query', async () => {
     //         jest.spyOn(db, 'query')
     //             .mockResolvedValueOnce({ 
-    //                 rows: [{id: 1, title: 'book1'}, {id: 2, title: 'book2'}]
+    //                 rows: [{id: 1, habit_name: 'habit1', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1 }, {id: 2, habit_name: 'habit2', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1}]
     //             });
-    //         let testUser = new User({ id: 1, name: 'Test User'})
-    //         const books = await testUser.books;
-    //         expect(books).toHaveLength(2)
-    //         expect(books[0]).toHaveProperty('path', '/books/1')
+    //         let testUser = new User({ id: 1, username: 'Test User', email: 'kakarrot@go.ku', password_digest: 'aafadnthpqbsbapbb784' })
+    //         const habits = await testUser.habits;
+    //         expect(habits).toHaveLength(2)
+    //         expect(habits[0]).toHaveProperty('path', '/habits/1')
     //     })
     // });
 
@@ -41,15 +41,15 @@ describe('User', () => {
     //     })
     // });
 
-    // describe('findById', () => {
-    //     test('it resolves with author on successful db query', async () => {
-    //         let authorData = { id: 1, name: 'Test Author' }
-    //         jest.spyOn(db, 'query')
-    //             .mockResolvedValueOnce({rows: [ authorData] });
-    //         const result = await Author.findById(1);
-    //         expect(result).toBeInstanceOf(Author)
-    //     })
-    // });
+    describe('findById', () => {
+        test('it resolves with user on successful db query', async () => {
+            let userData = { id: 1, username: 'Test User' }
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({rows: [ userData] });
+            const result = await User.findById(1);
+            expect(result).toBeInstanceOf(User)
+        })
+    });
 
     // describe('create', () => {
     //     test('it resolves with author on successful db query', async () => {

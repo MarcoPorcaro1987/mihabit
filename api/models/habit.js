@@ -24,7 +24,6 @@ class Habit {
     static get all(){
         return new Promise (async (resolve, reject) => {
             try {
-                console.log(db);
                 let habitData = await db.query('SELECT * FROM habits');
                 let habits = habitData.rows.map(b => new Habit(b));
                 resolve (habits);

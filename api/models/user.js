@@ -20,7 +20,19 @@ class User {
             }
         })
     }
-	
+
+    // get habits(){
+    //     return new Promise (async (resolve, reject) => {
+    //         try {
+    //             const habitsData = await db.query(`SELECT * FROM habits WHERE habit_id = $1;`, [ this.id ]);
+    //             const habits = habitsData.rows.map(d => new Habit(d));
+    //             resolve(habits);
+    //         } catch (err) {
+    //             reject("User's habits could not be found");
+    //         };
+    //     });
+    // };
+
 // create user
 	static create({ email, userName, password }) {
 		return new Promise(async (res, rej) => {
@@ -49,19 +61,19 @@ class User {
 		});
 	}
 // //filter by email
-	static findByEmail(email) {
-		return new Promise(async (res, rej) => {
-			try {
-				let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
-				console.log(result)
-				let user = new User(result.rows[0]);
-				console.log(user)
-				res(user);
-			} catch (err) {
-				rej(`Error retrieving user: ${err}`);
-			}
-		});
-	}
+	// static findByEmail(email) {
+	// 	return new Promise(async (res, rej) => {
+	// 		try {
+	// 			let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
+	// 			console.log(result)
+	// 			let user = new User(result.rows[0]);
+	// 			console.log(user)
+	// 			res(user);
+	// 		} catch (err) {
+	// 			rej(`Error retrieving user: ${err}`);
+	// 		}
+	// 	});
+	// }
 //get users by id
 	// get users(){
     //     return new Promise (async (resolve, reject) => {

@@ -24,6 +24,7 @@ DROP TABLE IF EXISTS completions;
 CREATE TABLE completions (
     id serial PRIMARY KEY,
     completion_date varchar(200), 
-    habit_id int,
-    FOREIGN KEY(habit_id) REFERENCES habits(id)
+    habit_id int
 );
+-- ,
+--     FOREIGN KEY(habit_id) REFERENCES habits(id)
