@@ -12,7 +12,8 @@ CREATE TABLE habits (
     habit_name varchar(255) NOT NULL,
     habit_description varchar(500) NOT NULL, 
     habit_frequency varchar(200) NOT NULL,
-    frequency_target int NOT NULL
+    frequency_target int NOT NULL,
+    user_id int
 );
 
     -- user_id int 
