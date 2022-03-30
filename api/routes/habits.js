@@ -3,7 +3,8 @@ const router = express.Router();
 const habitsController = require('../controllers/habits')
 
 router.get('/', habitsController.index)
-router.get('/:id/habits', habitsController.show);
+router.get('/:id', habitsController.show);
+// router.get('/:id', habitsController.getUser);
 // router.post('/', habitsController.create)
 // router.delete('/:id', habitsController.destroy);
 

@@ -1,4 +1,5 @@
 const Habit = require('../models/habit');
+const User = require('../models/user');
 
 // const verifyToken = require('../middleware/middleware')
 
@@ -19,6 +20,17 @@ async function show (req, res) {
         res.status(404).json({err})
     }
 }
+
+async function getUser(req, res){
+        try {
+            const habitsData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ this.id ]);
+            const habits = habitsData.rows.map(d => new User(d));
+            res.json(habits);
+        } catch (err) {
+            res.status(404).json({err});
+        }
+};
+
 
 // async function create (req, res) {
 //     try {
@@ -110,4 +122,4 @@ async function show (req, res) {
 // 	}
 // });
 
-module.exports = {index, show};
+module.exports = {index, show, getUser};

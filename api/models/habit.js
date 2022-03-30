@@ -49,6 +49,28 @@ class Habit {
         });
     };
 
+    static findByUser (id) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                let habitsData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ id ]);
+                const habits = habitsData.rows.map(d => new Habit(d))
+                resolve (habits);
+            } catch (err) {
+                reject('Error retrieving user\'s habits');
+            }
+        });
+    }
+    // get habits(){
+    //     return new Promise (async (resolve, reject) => {
+    //         try {
+    //             const habitsData = await db.query(`SELECT * FROM habits WHERE habit_id = $1;`, [ this.id ]);
+    //             const habits = habitsData.rows.map(d => new Habit(d));
+    //             resolve(habits);
+    //         } catch (err) {
+    //             reject("User's habits could not be found");
+    //         };
+    //     });
+    // };
 
 
 

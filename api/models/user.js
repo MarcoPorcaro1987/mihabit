@@ -1,5 +1,5 @@
 const db = require('../dbConfig/init');
-
+const Habit = require("./habit")
 class User {
 	constructor(data) {
 		this.id = data.id;
@@ -21,34 +21,6 @@ class User {
         })
     }
 
-    // get habits(){
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
-    //             const habitsData = await db.query(`SELECT * FROM habits WHERE habit_id = $1;`, [ this.id ]);
-    //             const habits = habitsData.rows.map(d => new Habit(d));
-    //             resolve(habits);
-    //         } catch (err) {
-    //             reject("User's habits could not be found");
-    //         };
-    //     });
-    // };
-
-// create user
-	static create({ email, userName, password }) {
-		return new Promise(async (res, rej) => {
-			try {
-				let result = await db.query(
-					`INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
-					[userName, email, password]
-				);
-				let user = new User(result.rows[0]);
-				res(user);
-			} catch (err) {
-				rej(`Error creating user: ${err}`);
-			}
-		});
-	}
-
 	static findById(id) {
 		return new Promise(async (res, rej) => {
 			try {
@@ -60,6 +32,37 @@ class User {
 			}
 		});
 	}
+
+	get habits(){
+        return new Promise (async (resolve, reject) => {
+            try {
+                const habitsData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ this.id ]);
+                const habits = habitsData.rows.map(d => new Habit(d));
+                resolve(habits);
+            } catch (err) {
+                reject("User's habits could not be found");
+            };
+        });
+    };
+
+
+// create user
+	// static create({ email, userName, password }) {
+	// 	return new Promise(async (res, rej) => {
+	// 		try {
+	// 			let result = await db.query(
+	// 				`INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
+	// 				[userName, email, password]
+	// 			);
+	// 			let user = new User(result.rows[0]);
+	// 			res(user);
+	// 		} catch (err) {
+	// 			rej(`Error creating user: ${err}`);
+	// 		}
+	// 	});
+	// }
+
+
 // //filter by email
 	// static findByEmail(email) {
 	// 	return new Promise(async (res, rej) => {
