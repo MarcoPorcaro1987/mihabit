@@ -4,6 +4,10 @@ const dayOfYear = require('dayjs/plugin/dayOfYear');
 const weekOfYear = require('dayjs/plugin/weekOfYear');
 dayjs.extend(dayOfYear);
 dayjs.extend(weekOfYear);
+
+//??? days stuff
+
+
 const User = require('./user');
 class Habit {
 	constructor(data) {
