@@ -35,7 +35,7 @@ async function create (req, res) {
 async function destroy (req, res) {
 	try {
 		const habit = await Habit.findById(req.params.id);
-		await habit.destroyHabit();
+		await habit.destroy();
 		res.status(204).json();
 	} catch (err) {
 		if (err.message === 'Habit not found') {
