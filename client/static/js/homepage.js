@@ -80,7 +80,7 @@ async function displayHabits(habits) {
 
 
         //fill necessary parts with database information
-        const habitNameUser = document.createTextNode(`${entry.habitName}`) //???
+        const habitNameUser = document.createTextNode(`${habit_name}`) //???
         const habitDescriptionUser = document.createTextNode(`${entry.habitDescription}`)
         const habitFrequencyUser = document.createTextNode(`${entry.habitFrequency}`)
         const habitTargetUser = document.createTextNode(`${entry.habitTarget}`)
