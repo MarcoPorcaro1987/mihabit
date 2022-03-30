@@ -1,0 +1,27 @@
+
+
+
+
+.form-group {
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+    width: 100px;
+  }
+  .header {
+    height: 4.25rem;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.3125rem;
+    align-items: center;
+}
+textarea:focus, input:focus {
+    border: 2px solid #900;
+  }
+.home-button {
+    padding: 0.3125rem 0.625rem;
+    background-color: lightcoral;
+    border-radius: 0.625rem;
+    color: white;
+    margin-left: 0.3125rem;
+}
