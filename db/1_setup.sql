@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
-    email varchar(100) PRIMARY KEY,
+    id serial PRIMARY KEY,
+    email varchar(100) NOT NULL UNIQUE,
     username varchar(255) NOT NULL UNIQUE,
     password_digest varchar(500) NOT NULL
 );
@@ -11,11 +12,10 @@ CREATE TABLE habits (
     habit_name varchar(255) NOT NULL,
     habit_description varchar(500) NOT NULL, 
     habit_frequency varchar(200) NOT NULL,
-    frequency_target int NOT NULL, 
-    email varchar(100) NOT NULL, 
-    FOREIGN KEY(email) REFERENCES users(email) 
+    frequency_target int NOT NULL
 );
-
+    -- email varchar(100) NOT NULL
+    -- FOREIGN KEY(email) REFERENCES users(email) 
 DROP TABLE IF EXISTS completions;
 CREATE TABLE completions (
     id serial PRIMARY KEY,
@@ -25,18 +25,20 @@ CREATE TABLE completions (
 );
 
 
-INSERT INTO users (email, username, password_digest)
-VALUES
-('kakarrot@go.ku','Goku', 'tu9ibtoi4tbh2hhuet' ),
-('majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
-('freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' );
 
-INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target, email )
+INSERT INTO users (id, email, username, password_digest) 
 VALUES
-    ('walking','walking 30 min daily','daily', 4, 'kakarrot@go.ku'),
-    ('swimming','swimming one hour daily','daily', 3, 'majin@buu.com'),
-    ('sleeping','sleep 8 hours daily', 'daily', 7, 'freezer@dg.dk'),
-    ('playing football', 'playing football 4 times a week', 'weekly', 4, 'kakarrot@go.ku');
+(1, 'kakarrot@go.ku','Goku', 'tu9ibtoi4tbh2hhuet' ),
+(2, 'majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
+(3, 'freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' ),
+(4, 'lion@king.lk','Simba', 'aafadnthpqbsbapbb784' );
+
+INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target)
+VALUES
+    ('walking','walking 30 min daily','daily', 4),
+    ('swimming','swiming one hour daily','daily', 3),
+    ('sleeping','sleep 8 hours daily', 'daily', 7),
+    ('playing football', 'playing football 4 times a week', 'weekly', 4);
 
 INSERT INTO habits (completion_date, habit_id)
 VALUES

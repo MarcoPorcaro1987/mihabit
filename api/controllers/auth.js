@@ -3,9 +3,11 @@ const express = require('express')
 const router = express.Router()
 
 const jwt = require('jsonwebtoken')
-const bycrypt = require('bcryptjs')
+const bycrypt = require('bcrypt')
 // const { user } = require('pg/lib/defaults')
 
+
+const { verifyToken } = require('../middleware/middleware');
 // models import
 
 const User = require('../models/user')
@@ -49,7 +51,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-
+module.exports = router;
 
 
 
