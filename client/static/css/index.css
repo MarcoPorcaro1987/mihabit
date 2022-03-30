@@ -1,0 +1,59 @@
+
+body{
+    background-image: url("https://uploads-ssl.webflow.com/5d3aa39f8474c472841a7dfc/5ebcc59670fd035f273285f4_96818726_683701209084212_5551295202024488960_n%20(1)-min.jpg");
+    background-size: cover;
+}
+.logo {
+    height: 4.25rem;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.3125rem;
+    align-items: center;
+}
+
+.logo-Mihabit {
+    margin-top: 3%;
+    height: 80px;
+    margin-right: 90%; 
+    /* 52 */
+}
+
+
+button {
+    padding: 0.3125rem 0.625rem;
+    background-color: lightcoral;
+    border-radius: 0.625rem;
+    color: white;
+    margin-left: 0.3125rem;
+    margin: 5px;
+    margin-top: 10px;
+    width:100px;
+    text-align: center;
+    
+}
+
+.form-label {
+    margin: 1%;
+    padding-top: 1%;
+}
+
+
+#login-form, #register-form{
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.form-input {
+   width: 100%;
+}
+
+.content{
+    display:flex;
+    height: auto; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}

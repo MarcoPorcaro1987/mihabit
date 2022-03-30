@@ -15,14 +15,14 @@ function registerListeners() {
     })
 
     function showForm(form) {
-        form.style.display = "block" //change to flex when css is added
+        form.style.display = "block" 
         loginDetails.style.display = "none"
         registerBtn.style.display = "none"
         backBtn.style.display = "block"
     }
     
     backBtn.addEventListener("click", e => {
-        loginDetails.style.display = "block" //change to flex when css is added
+        loginDetails.style.display = "block" 
         registerBtn.style.display = "block"
         backBtn.style.display = "none"
         registerForm.style.display = "none"
