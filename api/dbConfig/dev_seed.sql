@@ -1,9 +1,9 @@
-INSERT INTO users (email, username, password_digest) 
+INSERT INTO users (id, email, username, password_digest) 
 VALUES
-('kakarrot@go.ku','Goku', 'tu9ibtoi4tbh2hhuet' ),
-('majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
-('freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' ),
-('lion@king.lk','Simba', 'aafadnthpqbsbapbb784' );
+(1, 'kakarrot@go.ku','Goku', 'tu9ibtoi4tbh2hhuet' ),
+(2, 'majin@buu.com', 'Majin Buu', 'h4hoeuba3r3tbaeu' ),
+(3, 'freezer@dg.dk','Freezer', 'ahudnthpdohbapbb243' ),
+(4, 'lion@king.lk','Simba', 'aafadnthpqbsbapbb784' );
 
 INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target, user_id )
 VALUES
