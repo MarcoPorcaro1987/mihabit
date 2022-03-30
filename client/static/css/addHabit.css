@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -9,19 +10,54 @@
     width: 100px;
   }
   .header {
+=======
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url("https://uploads-ssl.webflow.com/5d3aa39f8474c472841a7dfc/5ebcc59670fd035f273285f4_96818726_683701209084212_5551295202024488960_n%20(1)-min.jpg");
+    background-size: cover;
+}
+
+header {
+>>>>>>> 1358cc728841d3e439a37c70a88543ba3bb62c67
     height: 4.25rem;
     display: flex;
     justify-content: space-around;
     padding: 0.3125rem;
     align-items: center;
 }
+<<<<<<< HEAD
 textarea:focus, input:focus {
     border: 2px solid #900;
   }
 .home-button {
+=======
+
+a{
+    text-decoration: none;
+}
+.logo-Mihabit {
+    height: 50px;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout-button {
+>>>>>>> 1358cc728841d3e439a37c70a88543ba3bb62c67
     padding: 0.3125rem 0.625rem;
     background-color: lightcoral;
     border-radius: 0.625rem;
     color: white;
     margin-left: 0.3125rem;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1358cc728841d3e439a37c70a88543ba3bb62c67
