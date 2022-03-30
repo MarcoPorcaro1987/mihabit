@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const habitsController = require('../controllers/habits')
-const verifyToken = require('../middleware/middleware')
+const { verifyToken } = require('../middleware/middleware')
 
 router.get('/', verifyToken, habitsController.index);
 router.get('/:id', verifyToken, habitsController.show);
