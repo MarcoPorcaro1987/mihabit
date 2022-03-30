@@ -67,5 +67,5 @@ async function registration(e){
 
 function login(data){
     localStorage.setItem('username', data.user);
-    location.hash = '#feed';
+    location.hash = '../../homepage.html';
 }

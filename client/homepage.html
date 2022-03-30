@@ -19,7 +19,7 @@
             <img class="logo-Mihabit" src="./static/img/habit tracker.jpg" alt="">
         </div>
         <div class="button-container">
-            <button type="button" class="btn btn-primary">+</button>
+            <button type="button" class="btn btn-primary" id="addbtn">+</button>
             <a href=""><span class="logout-button">Logout</span></a>
         </div>
     </header>
@@ -60,8 +60,13 @@
                         </li>
                         <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                           <div class="d-flex flex-row justify-content-end mb-1">
-                            <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
-                            <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo">
+                              <button class="update"> <i class="fas fa-pencil-alt me-3"></i></button>
+                              
+                             </a>
+                            <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo">
+                              <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                              </a>
                           </div>
                           <div class="text-end text-muted">
                             <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">

@@ -98,10 +98,5 @@ function login(data) {
     let userInfo = jwt_decode(data.token);
     localStorage.setItem('email', userInfo.email)
     localStorage.setItem('username', userInfo.username);
-    location.hash = '#feed'; //unsure if correct
-}
-
-function logout() {
-    localStorage.clear();
-    location.hash = '#login'
+    location.href = '../../hompage.html'; //unsure if correct
 }
