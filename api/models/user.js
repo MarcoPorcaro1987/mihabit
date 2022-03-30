@@ -4,8 +4,8 @@ class User {
 	constructor(data) {
 		this.id = data.id;
 		this.email = data.email;
-		this.username = data.username;
-		this.passwordDigest = data.password_digest;
+		this.userName = data.userName;
+		this.password= data.password_digest;
 	}
 
 // get all users
@@ -22,12 +22,12 @@ class User {
     }
 	
 // create user
-	static create({ username, email, passwordDigest }) {
+	static create({ email, userName, password }) {
 		return new Promise(async (res, rej) => {
 			try {
 				let result = await db.query(
 					`INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
-					[username, email, passwordDigest]
+					[userName, email, password]
 				);
 				let user = new User(result.rows[0]);
 				res(user);
@@ -53,7 +53,9 @@ class User {
 		return new Promise(async (res, rej) => {
 			try {
 				let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
+				console.log(result)
 				let user = new User(result.rows[0]);
+				console.log(user)
 				res(user);
 			} catch (err) {
 				rej(`Error retrieving user: ${err}`);

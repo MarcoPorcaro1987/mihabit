@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const jwt = require('jsonwebtoken')
-const bycrypt = require('bcrypt')
+const bycrypt = require('bcryptjs')
 // const { user } = require('pg/lib/defaults')
 
 
@@ -24,13 +24,15 @@ router.post('/register', async (req, res) => {
     }
 })
 
-//generating of jsonwebtokens
-
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findByEmail(req.body.email)
+        console.log(user)
         if (!user) { throw new Error('No user with this email') }
-        const authed = bcrypt.compare(req.body.password, user.passwordDigest)
+        console.log(req.body.password)
+        console.log(user.password)
+        const authed =  await bycrypt.compare(req.body.password, user.password)
+        
         if (!!authed) {
             jwt.sign({username: user.username, email: user.email}, process.env.SECRET_KEY, { expiresIn: '30m' }, (err, token) => {
                 if (err) {
@@ -38,7 +40,7 @@ router.post('/login', async (req, res) => {
                 } else {
                     res.status(200).json({
                         success: true,
-                        token: token
+                        token: 'Bearer ' + token
                     })
                 }
             })
@@ -146,4 +148,3 @@ router.post('./logout', async (req, res) => {
 module.exports = router
 
 
-  
