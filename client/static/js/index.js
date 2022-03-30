@@ -95,13 +95,11 @@ async function requestRegistration(e) {
 
 function login(data) {
     localStorage.setItem('token', data.token)
+    console.log(userInfo)
     let userInfo = jwt_decode(data.token);
     localStorage.setItem('email', userInfo.email)
     localStorage.setItem('username', userInfo.username);
-    location.hash = '#feed'; //unsure if correct
+    // location.hash = '#feed'; //unsure if correct
+    // location.href = './hompage.html';
 }
 
-function logout() {
-    localStorage.clear();
-    location.hash = '#login'
-}
