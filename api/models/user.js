@@ -47,49 +47,20 @@ class User {
 
 
 // create user
-	// static create({ email, userName, password }) {
-	// 	return new Promise(async (res, rej) => {
-	// 		try {
-	// 			let result = await db.query(
-	// 				`INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
-	// 				[userName, email, password]
-	// 			);
-	// 			let user = new User(result.rows[0]);
-	// 			res(user);
-	// 		} catch (err) {
-	// 			rej(`Error creating user: ${err}`);
-	// 		}
-	// 	});
-	// }
-
-
-// //filter by email
-	// static findByEmail(email) {
-	// 	return new Promise(async (res, rej) => {
-	// 		try {
-	// 			let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
-	// 			console.log(result)
-	// 			let user = new User(result.rows[0]);
-	// 			console.log(user)
-	// 			res(user);
-	// 		} catch (err) {
-	// 			rej(`Error retrieving user: ${err}`);
-	// 		}
-	// 	});
-	// }
-//get users by id
-	// get users(){
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
-    //             const usersData = await db.query(`SELECT * FROM users WHERE id = $1;`, [ this.id ]);
-    //             const users = usersData.rows.map(d => new User(d));
-    //             resolve(users);
-    //         } catch (err) {
-    //             reject("User could not be found");
-    //         };
-    //     });
-    // };
-
+	static create({ email, username, password_digest }) {
+		return new Promise(async (res, rej) => {
+			try {
+				let result = await db.query(
+					`INSERT INTO users (email, username, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
+					[email, username, password_digest]
+				);
+				let user = new User(result.rows[0]);
+				res(user);
+			} catch (err) {
+				rej(`Error creating user: ${err}`);
+			}
+		});
+	}
 }
 
 module.exports = User;

@@ -32,14 +32,32 @@ async function getUser(req, res){
 };
 
 
-// async function create (req, res) {
-//     try {
-//         const book = await Book.create(req.body.title, req.body.year_of_publication, req.body.abstract, req.body.author_id );
-//         res.status(201).json(book)
-//     } catch (err) {
-//         res.status(422).json({err})
-//     }
-// }
+async function create (req, res) {
+    try {
+        const habit = await Habit.create({ habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target, user_id: req.body.user_id });
+        res.status(201).json(habit)
+    } catch (err) {
+        res.status(500).send({ err });
+    }
+}
+
+
+// // Delete habits
+async function destroy (req, res) {
+	try {
+		const habit = await Habit.findById(req.params.id);
+		await habit.destroyHabit();
+		res.status(204).json();
+	} catch (err) {
+		if (err.message === 'Habit not found') {
+			res.status(404).json({ err: err.message });
+		} else {
+			res.status(500).send();
+		}
+	}
+};
+
+module.exports = {index, show, getUser, create, destroy};
 
 // async function destroy (req, res) {
 //     try {
@@ -51,53 +69,6 @@ async function getUser(req, res){
 //     }
 // }
 
-
-
-// // get all the habits for each user/email 
-// router.get('/', /*verifyToken,*/ async (req, res) => {
-// 	try {
-// 		const habits = await Habit.findByEmail(req.email);
-// 		res.status(200).json(habits); 
-// 	} catch (err) {
-// 		res.status(500).send({ err });
-// 	}
-// });
-
-// //get a specific habit by id
-// router.get('/:id',/*verifyToken,*/ async (req, res) => {
-// 	try {
-// 		const { id } = req.params;
-// 		const habit = await Habit.findById(id);
-// 		res.status(200).send({ habit });
-// 	} catch (err) {
-// 		res.status(500).send({ err });
-// 	}
-// });
-
-// // Create habits
-// router.post('/', /*verifyToken,*/ async (req, res) => {
-// 	try {
-// 		const habit = await Habit.create({ email: req.body.email, habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target });
-// 		res.status(201).json(habit); 
-// 	} catch (err) {
-// 		res.status(500).send({ err });
-// 	}
-// });
-
-// // Delete habits
-// router.delete('/:id', /*verifyToken,*/ async (req, res) => {
-// 	try {
-// 		const habit = await Habit.findById(req.params.id);
-// 		await habit.destroyHabit();
-// 		res.status(204).json();
-// 	} catch (err) {
-// 		if (err.message === 'Habit not found') {
-// 			res.status(404).json({ err: err.message });
-// 		} else {
-// 			res.status(500).send();
-// 		}
-// 	}
-// });
 
 // //check if a habit is complete
 // router.get('/:id/complete', /*verifyToken,*/ async (req, res) => {
@@ -122,4 +93,12 @@ async function getUser(req, res){
 // 	}
 // });
 
-module.exports = {index, show, getUser};
+// // Create habits
+// router.post('/', /*verifyToken,*/ async (req, res) => {
+// 	try {
+// 		const habit = await Habit.create({ email: req.body.email, habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target });
+// 		res.status(201).json(habit); 
+// 	} catch (err) {
+// 		res.status(500).send({ err });
+// 	}
+// });

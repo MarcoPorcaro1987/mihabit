@@ -6,9 +6,8 @@ dayjs.extend(dayOfYear);
 dayjs.extend(weekOfYear);
 const User = require('./user');
 class Habit {
-	constructor(data, user) {
+	constructor(data) {
 		this.id = data.id;
-		this.email = data.email;
 		this.habitName = data.habit_name;
 		this.description = data.habit_description;
 		this.frequency = data.habit_frequency;
@@ -17,7 +16,7 @@ class Habit {
 		this.bestPeriod = data.bestPeriod;
 		this.currentCompletions = data.currentCompletions;
         this.completionDates = data.completionDates;
-		this.user = { name: data.user_username, path: `/users/${data.user_id}`};
+		this.user = { path: `/users/${data.user_id}`};
 	}
 
 
@@ -60,84 +59,80 @@ class Habit {
             }
         });
     }
-    // get habits(){
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
-    //             const habitsData = await db.query(`SELECT * FROM habits WHERE habit_id = $1;`, [ this.id ]);
-    //             const habits = habitsData.rows.map(d => new Habit(d));
-    //             resolve(habits);
-    //         } catch (err) {
-    //             reject("User's habits could not be found");
-    //         };
-    //     });
-    // };
+
+/*create habit*/
+	static create({habit_name, habit_description, habit_frequency, frequency_target, user_id }) {
+		return new Promise(async (res, rej) => {
+			try {
+				let result = await db.query(
+					`INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+					[habit_name, habit_description, habit_frequency, frequency_target, user_id]
+				);
+
+				let completionDates = [];
+
+				let habit = new Habit({
+					...result.rows[0],
+					completionDates,
+					currentPeriod: 0,
+					bestPeriod: 0,
+				});
+				res(habit);
+			} catch (err) {
+				rej(`Error creating habit: ${err}`);
+			}
+		});
+	}
+
+	//delete a habit
+	destroyHabit() {
+		return new Promise(async (resolve, reject) => {
+			try {
+				await db.query(`DELETE FROM completions WHERE habit_id = $1;`, [this.id]);
+				await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
+				resolve('Habit was deleted');
+			} catch (err) {
+				reject('Habit could not be deleted');
+			}
+		});
+	}
+
+ 	//delete a habit
+    destroyHabit() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await db.query(`DELETE FROM habits WHERE habit_id = $1;`, [this.id]);
+                await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
+                resolve('Habit was deleted');
+            } catch (err) {
+                reject('Habit could not be deleted');
+            }
+        });
+    }
+}
+module.exports = Habit;
 
 
+// // //mark a habit as complete for the day 
+// // 	markAsComplete() {
+// // 		return new Promise(async (res, rej) => {
+// // 			try {
+// // 				const today = new Date();
+// // 				const todaysDate = `${today.getFullYear()}-${(today.getMonth() + 1)
+// // 					.toString()
+// // 					.padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
+// // 				const result = await db.query(
+// // 					'INSERT INTO completions (completion_date, habit_id) VALUES ($1, $2) RETURNING *;',
+// // 					[todaysDate, this.id]
+// // 				);
+// // 				res(result.rows[0]);
+// // 			} catch (err) {
+// // 				rej(err);
+// // 			}
+// // 		});
+// // 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// //show all habits for single user
-// static findByEmail(email) {
-// 	return new Promise(async (res, rej) => {
-// 		try {
-// 			headers: {
-// 				Authorization: `Bearer: ${localStorage.getItem('token')}`
-// 			}
-
-// 			const db = await initDB();
-// 			const habitData = await db.collection('habits').find({ userEmail: email }).toArray();
-// 			const habits = habitData.map(data => new Habit({ ...data, id: data._id }));
-// 			resolve(habits)
-
-			
-// 		} catch (err) {
-// 			rej(`Error retrieving habits for ${ email }`)
-// 		}
-// 	})
-	
-// }
-
-
-// /*create habit*/
-// 	static create({ email, name, description, frequency, goal }) {
-// 		return new Promise(async (res, rej) => {
-// 			try {
-// 				let result = await db.query(
-// 					`INSERT INTO habits (email, habit_name, habit_description, habit_frequency, frequency_target) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-// 					[email, name, description, frequency, goal]
-// 				);
-
-// 				let completionDates = [];
-
-// 				let habit = new Habit({
-// 					...result.rows[0],
-// 					completionDates,
-// 					currentPeriod: 0,
-// 					bestPeriod: 0,
-// 				});
-// 				res(habit);
-// 			} catch (err) {
-// 				rej(`Error creating habit: ${err}`);
-// 			}
-// 		});
-// 	}
-
-	
 // // 	// track a habit by id: to see if they have completed a habit for the day and see their most recent completion streak */
 // // 	static findById(id) {
 // // 		return new Promise(async (res, rej) => {
@@ -254,37 +249,23 @@ class Habit {
 // // 		};
 // // 	}
 
-// // 	//delete a habit
-// // 	destroyHabit() {
-// // 		return new Promise(async (resolve, reject) => {
-// // 			try {
-// // 				await db.query(`DELETE FROM completions WHERE habit_id = $1;`, [this.id]);
-// // 				await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
-// // 				resolve('Habit was deleted');
-// // 			} catch (err) {
-// // 				reject('Habit could not be deleted');
-// // 			}
-// // 		});
-// // 	}
+// //show all habits for single user
+// static findByEmail(email) {
+// 	return new Promise(async (res, rej) => {
+// 		try {
+// 			headers: {
+// 				Authorization: `Bearer: ${localStorage.getItem('token')}`
+// 			}
 
-// // //mark a habit as complete for the day 
-// // 	markAsComplete() {
-// // 		return new Promise(async (res, rej) => {
-// // 			try {
-// // 				const today = new Date();
-// // 				const todaysDate = `${today.getFullYear()}-${(today.getMonth() + 1)
-// // 					.toString()
-// // 					.padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+// 			const db = await initDB();
+// 			const habitData = await db.collection('habits').find({ userEmail: email }).toArray();
+// 			const habits = habitData.map(data => new Habit({ ...data, id: data._id }));
+// 			resolve(habits)
 
-// // 				const result = await db.query(
-// // 					'INSERT INTO completions (completion_date, habit_id) VALUES ($1, $2) RETURNING *;',
-// // 					[todaysDate, this.id]
-// // 				);
-// // 				res(result.rows[0]);
-// // 			} catch (err) {
-// // 				rej(err);
-// // 			}
-// // 		});
-// // 	}
-}
-module.exports = Habit;
+			
+// 		} catch (err) {
+// 			rej(`Error retrieving habits for ${ email }`)
+// 		}
+// 	})
+	
+// }
