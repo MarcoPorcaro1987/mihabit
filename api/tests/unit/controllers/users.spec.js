@@ -24,7 +24,7 @@ describe('users controller', () => {
     describe('show', () => {
         test('it returns an user and their habits with a 200 status code', async () => {
             jest.spyOn(User, 'findById')
-                .mockResolvedValue(new User({ id: 1, username: 'Test User'} ));
+                .mockResolvedValue(new User({ id: 1, email: 'kakarrot@go.ku', userName: 'Test User', password:'tu9ibtoi4tbh2hhuet' } ));
             jest.spyOn(User.prototype, 'habits', 'get')
                 .mockResolvedValue(['habit1', 'habit2']);
                 
@@ -32,8 +32,7 @@ describe('users controller', () => {
             await usersController.show(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(200);
             expect(mockJson).toHaveBeenCalledWith({
-                id: 1,
-                username: 'Test Author',
+                id: 1, email: 'kakarrot@go.ku', username: 'Test User', password:'tu9ibtoi4tbh2hhuet',
                 habits: ['habit1', 'habit2']
             });
         })

@@ -21,17 +21,6 @@ async function show (req, res) {
     }
 }
 
-async function getUser(req, res){
-        try {
-            const habitsData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ this.id ]);
-            const habits = habitsData.rows.map(d => new User(d));
-            res.json(habits);
-        } catch (err) {
-            res.status(404).json({err});
-        }
-};
-
-
 async function create (req, res) {
     try {
         const habit = await Habit.create({ habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target, user_id: req.body.user_id });
@@ -52,12 +41,12 @@ async function destroy (req, res) {
 		if (err.message === 'Habit not found') {
 			res.status(404).json({ err: err.message });
 		} else {
-			res.status(500).send();
+			res.status(204).send();
 		}
 	}
 };
 
-module.exports = {index, show, getUser, create, destroy};
+module.exports = {index, show, create, destroy};
 
 // async function destroy (req, res) {
 //     try {
