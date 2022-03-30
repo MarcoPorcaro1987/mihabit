@@ -61,7 +61,7 @@ This website is deployed via Netlify and Heroku.
 
 ## Authors and Acknowledgements 
 
-- Heather McGlynn
 - Alina Laura Vizitiu
 - Immanuel Egboche
 - Marco Porcaro
+- Heather McGlynn
