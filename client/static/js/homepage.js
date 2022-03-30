@@ -12,7 +12,7 @@ function navbar() {
 
 async function loadHabits(id) {
 
-    fetch(`${API_URL}/habits/${id}`, { //check whether route is correct
+    fetch(`${API_URL}/users/${id}`, { //check whether route is correct
         headers: new Headers({ 'Authorization': localStorage.getItem('token')})
     })
         .then(resp => {
@@ -128,9 +128,9 @@ async function displayHabits(habits) {
         deleteBtn.appendChild(deleteHabitImage)
 
 
-        //add delete and update function 
-
-        //const deleteHabit = 
+        //add delete and update attributes 
+        deleteBtn.setAttribute('id', `deleteBtn${habits[i].id}`);
+        deleteHabitImage(`deleteBtn${habits[i].id}`, habits[i].id)
 
 
 
