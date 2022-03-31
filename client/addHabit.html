@@ -11,7 +11,7 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="static/css/addHabit.css">
-    <script defer src="static/js/addHabit.js"></script>
+    <script defer src="./static/js/addHabit.js"></script>
     <title>Add Habit</title>
 </head>
 
@@ -35,22 +35,22 @@
         </p>
       </div>
         <section id = "modal">
-            <form>
+            <form id="habit-form">
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Add a habit</label>
                 </div>
                   <div class="form-group">
                     <label for="habitTitle">Habit name:</label>
-                    <textarea class="form-control" id="habitTitle" rows="3"></textarea>
+                    <textarea class="form-control" id="habitTitle" name="habit_name"rows="3"></textarea>
                   </div> 
                   <div class="form-group">
                     <label for="habitDescription">Habit description:</label>
-                    <textarea class="form-control" id="habitDescription" rows="3"></textarea>
+                    <textarea class="form-control" id="habitDescription" name="habit_description" rows="3"></textarea>
                   </div> 
                 
                 <div class="form-group">
                   <label for="habitFrequency">Habit frequency:</label>
-                  <select multiple class="form-control" id="habitFrequency">
+                  <select  name='habit_frequency' multiple class="form-control" id="habitFrequency">
                     <option>Hourly</option>
                     <option>Daily</option>
                     <option>Weekly</option>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group">
                     <label for="target">Target frequency:</label>
-                    <select multiple class="form-control" id="target">
+                    <select multiple name='frequency_target' class="form-control" id="target">
                       <option>1</option>
                       <option>2</option>
                       <option>3</option>

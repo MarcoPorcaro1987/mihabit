@@ -23,7 +23,7 @@ async function show (req, res) {
 
 async function create (req, res) {
     try {
-        const habit = await Habit.create({ habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target, user_id: req.body.user_id });
+        const habit = await Habit.create({ habit_name: req.body.habit_name, habit_description: req.body.habit_description, habit_frequency: req.body.habit_frequency, frequency_target: req.body.frequency_target});
         res.status(201).json(habit)
     } catch (err) {
         res.status(500).send({ err });
