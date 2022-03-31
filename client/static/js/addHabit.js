@@ -150,4 +150,8 @@ async function deleteHabit(id) {
 	}
 }
 
+<<<<<<< HEAD
 //must be exported!!
+=======
+//must be exported!!
+>>>>>>> 2c6761c981f813c44fdb6f052dabf478217f02d2

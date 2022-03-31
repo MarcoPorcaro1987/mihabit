@@ -60,4 +60,17 @@ a{
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> 1358cc728841d3e439a37c70a88543ba3bb62c67
+=======
+
+.form-group {
+    margin-left: 25%;
+    width: 50%;
+}
+
+#addbtn {
+    margin: 2%;
+    margin-left: 25%;
+}
+>>>>>>> 2c6761c981f813c44fdb6f052dabf478217f02d2

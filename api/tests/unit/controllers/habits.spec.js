@@ -38,32 +38,32 @@ describe('habits controller', () => {
         })
     });
 
-    // describe('create', () => {
-    //     test('it returns a new book with a 201 status code', async () => {
-    //         let testBook = {
-    //             id: 2, title: 'Test Book', 
-    //             yearOfPublication: 2021,
-    //             abstract: 'testing', author_name: 'Bob', author_id: 1
-    //         }
-    //         jest.spyOn(Book, 'create')
-    //             .mockResolvedValue(new Book(testBook));
+    describe('create', () => {
+        test('it returns a new book with a 201 status code', async () => {
+            let testHabit = {
+                id: 1, habit_name: 'walking', 
+                habit_description: 'walking 30 min daily',
+                habit_frequency: 'daily', frequency_target: 4, user_id: 1
+            }
+            jest.spyOn(Habit, 'create')
+                .mockResolvedValue(new Habit(testHabit));
                 
-    //         const mockReq = { body: testBook }
-    //         await booksController.create(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(201);
-    //         expect(mockJson).toHaveBeenCalledWith(new Book(testBook));
-    //     })
-    // });
+            const mockReq = { body: testHabit }
+            await habitsController.create(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(201);
+            expect(mockJson).toHaveBeenCalledWith(new Habit(testHabit));
+        })
+    });
 
-    // describe('destroy', () => {
-    //     test('it returns a 204 status code on successful deletion', async () => {
-    //         jest.spyOn(Book.prototype, 'destroy')
-    //             .mockResolvedValue('Deleted');
+    describe('destroy', () => {
+        test('it returns a 204 status code on successful deletion', async () => {
+            jest.spyOn(Habit.prototype, 'destroy')
+                .mockResolvedValue('Deleted');
             
-    //         const mockReq = { params: { id: 1 } }
-    //         await booksController.destroy(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(204);
-    //     })
-    // });
+            const mockReq = { params: { id: 1 } }
+            await habitsController.destroy(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(204);
+        })
+    });
     
 })

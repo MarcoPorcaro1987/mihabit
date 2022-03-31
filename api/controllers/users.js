@@ -21,27 +21,19 @@ async function show(req, res) {
     };
 }
 
-async function getUser(req, res){
-    try {
-        const user = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ this.id ]);
-        const habits = habitsData.rows.map(d => new Habit(d));
-        res.json(habits);
-    } catch (err) {
-        res.status(404).json({err});
-    }
-};
+module.exports = {index, show}
 
-async function getUser(req, res){
-    try {
-        const user = await User.findById(parseInt(req.params.id))
-        console.log(user)
-        const habits = await user.habits
-        console.log(habits)
-        res.json(habits)
-    } catch(err) {
-        res.status(404).send({err}) 
-    }
-};
+// async function getUser(req, res){
+//     try {
+//         const user = await User.findById(parseInt(req.params.id))
+//         console.log(user)
+//         const habits = await user.habits
+//         console.log(habits)
+//         res.json(habits)
+//     } catch(err) {
+//         res.status(404).send({err}) 
+//     }
+// };
 
 // router.get('/:id/dogs', async (req, res) => {
 //     try {
@@ -76,5 +68,4 @@ async function getUser(req, res){
 
 
 
-module.exports = {index, show, getUser}
 

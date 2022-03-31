@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id serial PRIMARY KEY,
-    email varchar(100) NOT NULL UNIQUE,
-    username varchar(255) NOT NULL UNIQUE,
+    email varchar(100) NOT NULL,
+    username varchar(255) NOT NULL,
     password_digest varchar(500) NOT NULL
 );
 
@@ -17,6 +17,8 @@ CREATE TABLE habits (
 );
     -- email varchar(100) NOT NULL
     -- FOREIGN KEY(email) REFERENCES users(email) 
+
+
 DROP TABLE IF EXISTS completions;
 CREATE TABLE completions (
     id serial PRIMARY KEY,
