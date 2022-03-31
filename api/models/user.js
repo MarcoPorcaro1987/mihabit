@@ -1,10 +1,10 @@
 const db = require('../dbConfig/init');
-
+const Habit = require("./habit")
 class User {
 	constructor(data) {
 		this.id = data.id;
 		this.email = data.email;
-		this.userName = data.userName;
+		this.username = data.username;
 		this.password= data.password_digest;
 	}
 
@@ -20,22 +20,6 @@ class User {
             }
         })
     }
-	
-// create user
-	static create({ email, userName, password }) {
-		return new Promise(async (res, rej) => {
-			try {
-				let result = await db.query(
-					`INSERT INTO users (username, email, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
-					[userName, email, password]
-				);
-				let user = new User(result.rows[0]);
-				res(user);
-			} catch (err) {
-				rej(`Error creating user: ${err}`);
-			}
-		});
-	}
 
 	static findById(id) {
 		return new Promise(async (res, rej) => {
@@ -48,33 +32,49 @@ class User {
 			}
 		});
 	}
-// //filter by email
-	static findByEmail(email) {
+
+	get habits(){
+        return new Promise (async (resolve, reject) => {
+            try {
+                const habitsData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ this.id ]);
+                const habits = habitsData.rows.map(d => new Habit(d));
+                resolve(habits);
+            } catch (err) {
+                reject("User's habits could not be found");
+            };
+        });
+    };
+
+
+// create user
+	static create({ email, userName, password}) {
 		return new Promise(async (res, rej) => {
+			
 			try {
-				let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
-				console.log(result)
+				let result = await db.query(
+					`INSERT INTO users (email, username, password_digest) VALUES ($1, $2, $3) RETURNING *;`,
+					[email, userName, password]
+				);
+				
 				let user = new User(result.rows[0]);
-				console.log(user)
 				res(user);
 			} catch (err) {
-				rej(`Error retrieving user: ${err}`);
+				rej(`Error creating user: ${err}`);
 			}
 		});
 	}
-//get users by id
-	// get users(){
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
-    //             const usersData = await db.query(`SELECT * FROM users WHERE id = $1;`, [ this.id ]);
-    //             const users = usersData.rows.map(d => new User(d));
-    //             resolve(users);
-    //         } catch (err) {
-    //             reject("User could not be found");
-    //         };
-    //     });
-    // };
 
+	static findByEmail(email) {
+        return new Promise(async (res, rej) => {
+            try {
+                let result = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
+                let user = new User(result.rows[0]);
+                res(user);
+            } catch (err) {
+                rej(`Error retrieving user: ${err}`);
+            }
+        });
+}
 }
 
-module.exports = User;
+module.exports = User

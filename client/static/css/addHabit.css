@@ -37,3 +37,13 @@ a{
     margin-left: 0.3125rem;
 }
 
+
+.form-group {
+    margin-left: 25%;
+    width: 50%;
+}
+
+#addhabitbtn {
+    margin: 2%;
+    margin-left: 25%;
+}

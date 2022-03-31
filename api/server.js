@@ -10,10 +10,10 @@ const authroutes = require('./controllers/auth')
 server.use('/auth', authroutes)
 
 server.get('/', (req, res) => res.send('Welcome to the jungle'))
-const userRoutes = require('./controllers/users')
-
+const userRoutes = require('./routes/users')
+const habitRoutes = require('./routes/habits')
 server.use('/users', userRoutes)
-
+server.use('/habits', habitRoutes)
 // const authRoutes = require('./controllers/auth');
 // const userRoutes = require('./controllers/habits');
 // server.use('/auth', authRoutes);

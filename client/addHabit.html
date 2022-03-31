@@ -16,12 +16,14 @@
 
 <body>
     <header>
-        <div>
-            <img class="logo-Mihabit" src="./static/img/habit tracker.jpg" alt="">
+        <div id="logoBtn">
+          <a href="./homepage.html"><img class="logo-Mihabit" src="./static/img/habit tracker.jpg" alt=""></a>
+          
+            
         </div>
-        <div class="button-container">
-            <button type="button" class="btn btn-primary">+</button>
-            <a href=""><span class="logout-button">Logout</span></a>
+        <div id='logoutbtn'class="button-container">
+            <a href="./addHabit.html"><button type="button" class="btn btn-primary" id="addhabitbtn">+</button></a>
+            <a href="./index.html"><span class="logout-button">Logout</span></a>
         </div>
     </header>
     <main>
@@ -29,6 +31,50 @@
             <i class="fas fa-check-square me-1"></i>
             <i class="title">MiHabit</i>
         </p>
+
+        <section id = "modal">
+            <form>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Add a habit</label>
+                </div>
+                  <div class="form-group">
+                    <label for="habitTitle">Habit name:</label>
+                    <textarea class="form-control" id="habitTitle" rows="3"></textarea>
+                  </div> 
+                  <div class="form-group">
+                    <label for="habitDescription">Habit description:</label>
+                    <textarea class="form-control" id="habitDescription" rows="3"></textarea>
+                  </div> 
+                
+                <div class="form-group">
+                  <label for="habitFrequency">Habit frequency:</label>
+                  <select multiple class="form-control" id="habitFrequency">
+                    <option>Hourly</option>
+                    <option>Daily</option>
+                    <option>Weekly</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label for="target">Target frequency:</label>
+                    <select multiple class="form-control" id="target">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary mb-2" id="addbtn">Add</button>
+              </form>
+            </section>
+       
+
+
         
     </main>
 
