@@ -21,6 +21,7 @@ class Habit {
 		this.currentCompletions = data.currentCompletions;
         this.completionDates = data.completionDates;
 		this.user = { path: `/users/${data.user_id}`};
+		this.user_id = `${data.user_id}`
 	}
 
 
@@ -64,13 +65,26 @@ class Habit {
         });
     }
 
+	// static create(habitData) {
+    //     return new Promise(async (resolve, reject) => {
+    //         try {
+    //             const { habit_name, habit_description, habit_frequency, frequency_target } = habitData;
+    //             let user = await User.findById(user_id);
+    //             const result = await db.query(`INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [habit_name, habit_description, habit_frequency, frequency_target, user_id])
+    //             resolve(result.rows[0]);
+    //         } catch (err) {
+    //             reject('habit could not be created');
+    //         }
+    //     });
+    // };
+
 /*create habit*/
-	static create({habit_name, habit_description, habit_frequency, frequency_target, user_id }) {
+	static create({habit_name, habit_description, habit_frequency, frequency_target }) {
 		return new Promise(async (res, rej) => {
 			try {
 				let result = await db.query(
-					`INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-					[habit_name, habit_description, habit_frequency, frequency_target, user_id]
+					`INSERT INTO habits (habit_name, habit_description, habit_frequency, frequency_target) VALUES ($1, $2, $3, $4) RETURNING *;`,
+					[habit_name, habit_description, habit_frequency, frequency_target]
 				);
 
 				let completionDates = [];

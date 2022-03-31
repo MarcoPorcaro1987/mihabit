@@ -15,7 +15,7 @@ async function submitHabit(e) {
         habit_description: e.target.habit_description.value,
         habit_frequency: e.target.habit_frequency.value,
         frequency_target: e.target.frequency_target.value,
-        // user: e.target.user_id.value
+        // user_id: e.target.user_id.value
     };
     console.log(datahabit)
     const options = {
