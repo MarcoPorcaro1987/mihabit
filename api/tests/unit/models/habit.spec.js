@@ -32,16 +32,16 @@ describe('Habit', () => {
         })
     });
 
-    // describe('create', () => {
-    //     test('it resolves with book on successful db query', async () => {
-    //         let bookData = { title: 'Test Book', yearOfPublication: 2020, abstract: 'test', authorName: 'Test Author' }
-    //         jest.spyOn(db, 'query')
-    //             .mockResolvedValueOnce({rows: [ { ...bookData, id: 1 }] });
-    //         jest.spyOn(Author, 'findOrCreateByName')
-    //             .mockResolvedValueOnce(new Author({id: 1, name: 'Test Author'}));
-    //         const result = await Book.create(bookData);
-    //         expect(result).toHaveProperty('id')
-    //     })
-    // });
+    describe('create', () => {
+        test('it resolves with habit on successful db query', async () => {
+            let habitData = { habit_name: 'walking', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1 }
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({rows: [ { ...habitData, id: 1 }] });
+            jest.spyOn(User, 'findById')
+                .mockResolvedValueOnce(new User({id: 1, username: 'Test User'}));
+            const result = await Habit.create(habitData);
+            expect(result).toHaveProperty('id')
+        })
+    });
     
 })

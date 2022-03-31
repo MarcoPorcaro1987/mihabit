@@ -17,6 +17,8 @@ router.post('/register', async (req, res) => {
     try {
         const salt = await bycrypt.genSalt()
         const hashed = await bycrypt.hash(req.body.password, salt)
+        console.log(req.body.password)
+        console.log(req.body.userName)
         await User.create({ ...req.body, password: hashed })
         res.status(201).json({ message: 'User successfully created' })
     } catch (err) {

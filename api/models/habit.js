@@ -4,6 +4,10 @@ const dayOfYear = require('dayjs/plugin/dayOfYear');
 const weekOfYear = require('dayjs/plugin/weekOfYear');
 dayjs.extend(dayOfYear);
 dayjs.extend(weekOfYear);
+
+//??? days stuff
+
+
 const User = require('./user');
 class Habit {
 	constructor(data) {
@@ -85,7 +89,7 @@ class Habit {
 	}
 
 	//delete a habit
-	destroyHabit() {
+	destroy() {
 		return new Promise(async (resolve, reject) => {
 			try {
 				await db.query(`DELETE FROM completions WHERE habit_id = $1;`, [this.id]);
@@ -97,18 +101,6 @@ class Habit {
 		});
 	}
 
- 	//delete a habit
-    destroyHabit() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                await db.query(`DELETE FROM habits WHERE habit_id = $1;`, [this.id]);
-                await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
-                resolve('Habit was deleted');
-            } catch (err) {
-                reject('Habit could not be deleted');
-            }
-        });
-    }
 }
 module.exports = Habit;
 

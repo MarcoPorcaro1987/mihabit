@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./static/css/homepage.css">
     <title>MiHabit</title>
+    <script defer src="static/js/homepage.js"></script>
 </head>
 
 <body>
@@ -18,9 +19,9 @@
         <div>
             <img class="logo-Mihabit" src="./static/img/habit tracker.jpg" alt="">
         </div>
-        <div class="button-container">
-            <button type="button" class="btn btn-primary">+</button>
-            <a href=""><span class="logout-button">Logout</span></a>
+        <div id='logoutbtn'class="button-container">
+            <button type="button" class="btn btn-primary" id="addbtn">+</button>
+            <a href="./index.html"><span class="logout-button">Logout</span></a>
         </div>
     </header>
 
@@ -60,8 +61,13 @@
                         </li>
                         <li class="list-group-item ps-3 pe-0 py-1 rounded-0 border-0 bg-transparent">
                           <div class="d-flex flex-row justify-content-end mb-1">
-                            <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i class="fas fa-pencil-alt me-3"></i></a>
-                            <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo">
+                              <button class="update"> <i class="fas fa-pencil-alt me-3"></i></button>
+                              
+                             </a>
+                            <a href="#!" class="text-danger" data-mdb-toggle="tooltip" title="Delete todo">
+                              <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                              </a>
                           </div>
                           <div class="text-end text-muted">
                             <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
