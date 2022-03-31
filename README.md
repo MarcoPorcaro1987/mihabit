@@ -59,6 +59,9 @@ This website is deployed via Netlify and Heroku.
 ### Challenges
 
 
+## Future Features
+
+
 ## Authors and Acknowledgements 
 
 - Alina Laura Vizitiu
