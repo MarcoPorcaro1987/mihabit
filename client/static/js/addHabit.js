@@ -3,8 +3,30 @@ const modalHeader = modal.querySelector('habitTitle');
 const modalContent = modal.querySelector('habitDescription');
 const modalFrequency = modal.querySelector('habitFrequency');
 const modalTarget = modal.querySelector('target');
+const hbtform = document.body.querySelector('#habit-form')
 
-modal.addEventListener('submit', submitHabit);// or postHabit !!! i'm not sure which one is correct
+// modal.addEventListener('submit', po);// or postHabit !!! i'm not sure which one is correct
+hbtform.addEventListener('submit', submitHabit)
+async function submitHabit(e) {
+    e.preventDefault();
+
+    const datahabit = {
+        habit_name: e.target.habit_name.value,
+        habit_description: e.target.habit_description.value,
+        habit_frequency: e.target.habit_frequency.value,
+        frequency_target: e.target.frequency_target.value,
+        // user: e.target.user_id.value
+    };
+    console.log(datahabit)
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(datahabit),
+        headers: { "Content-Type": "application/json" }
+    };
+
+    const sendData = await fetch(`http://localhost:3000/habits/`, options);
+    const res = await sendData.json();
+    if (res.err) { throw Error(res.err) }
 
 
 function navbar() {
@@ -12,59 +34,40 @@ function navbar() {
     logoutBtn.addEventListener('click', logout)
 
 
-    function submitHabit(e) {
-        e.preventDefault();
-
-        const habitData = {
-            habit_name: e.target.habit_name.value,
-            habit_description: e.target.habit_description.value,
-            habit_frequency: e.target.habit_frequency.value,
-            frequency_target: e.target.frequency_target.value,
-            user: e.target.user_id.value
-        };
-
-        const options = {
-            method: 'POST',
-            body: JSON.stringify(habitData),
-            headers: { "Content-Type": "application/json" }
-        };
-
-        const sendData = await fetch(`http://localhost:3000/habit/`, options);//??
-        const res = await sendData.json();
-        if (res.err) { throw Error(res.err) }
+    
 
 
     };
     //!!!!
-    async function postHabit(habitData) {
-        const habitData = {
-            habit_name: e.target.habit_name.value,
-            habit_description: e.target.habit_description.value,
-            habit_frequency: e.target.habit_frequency.value,
-            frequency_target: e.target.frequency_target.value,
-            user: e.target.user_id.value
-        };
-        try {
-            const options = {
-                method: 'POST',
-                headers: new Headers({
-                    Authorization: localStorage.getItem('token'),
-                    'Content-Type': 'application/json',
-                }),
-                body: JSON.stringify(habitData),
-            };
-            const id = localStorage.getItem('id');
-            const url = `${devURL}/user/${id}/habits`;
-            const response = await fetch(url, options);
-            const responseJson = await response.json();
-            if (responseJson.err) {
-                throw new Error(err);
-            }
-            return responseJson;
-        } catch (err) {
-            console.warn(err);
-        }
-    }
+    // async function postHabit(habitData) {
+    //     const habitData = {
+    //         habit_name: e.target.habit_name.value,
+    //         habit_description: e.target.habit_description.value,
+    //         habit_frequency: e.target.habit_frequency.value,
+    //         frequency_target: e.target.frequency_target.value,
+    //         user: e.target.user_id.value
+    //     };
+    //     try {
+    //         const options = {
+    //             method: 'POST',
+    //             headers: new Headers({
+    //                 Authorization: localStorage.getItem('token'),
+    //                 'Content-Type': 'application/json',
+    //             }),
+    //             body: JSON.stringify(habitData),
+    //         };
+    //         const id = localStorage.getItem('id');
+    //         const url = `${devURL}/user/${id}/habits`;
+    //         const response = await fetch(url, options);
+    //         const responseJson = await response.json();
+    //         if (responseJson.err) {
+    //             throw new Error(err);
+    //         }
+    //         return responseJson;
+    //     } catch (err) {
+    //         console.warn(err);
+    //     }
+    // }
 
     // function appendHabits(data){
     //     data.habits.forEach(appendHabit);
