@@ -39,6 +39,11 @@ a{
 
 
 .form-group {
-    margin-left: 20%;
+    margin-left: 25%;
     width: 50%;
+}
+
+#addbtn {
+    margin: 2%;
+    margin-left: 25%;
 }
