@@ -21,8 +21,6 @@ async function show (req, res) {
     }
 }
 
-
-
 async function create (req, res) {
     try {
         const habit = await Habit.create({ habitName: req.body.habit_name, description: req.body.habit_description, frequency: req.body.habit_frequency, frequencyTarget: req.body.frequency_target, user_id: req.body.user_id });
@@ -37,13 +35,13 @@ async function create (req, res) {
 async function destroy (req, res) {
 	try {
 		const habit = await Habit.findById(req.params.id);
-		await habit.destroyHabit();
+		await habit.destroy();
 		res.status(204).json();
 	} catch (err) {
 		if (err.message === 'Habit not found') {
 			res.status(404).json({ err: err.message });
 		} else {
-			res.status(500).send();
+			res.status(204).send();
 		}
 	}
 };

@@ -18,19 +18,18 @@ describe('User', () => {
         })
     });
 
-    // describe('habits', () => {
-    //     test('it resolves with formatted habits on successful db query', async () => {
-    //         jest.spyOn(db, 'query')
-    //             .mockResolvedValueOnce({ 
-    //                 rows: [{id: 1, habit_name: 'habit1', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1 }, {id: 2, habit_name: 'habit2', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1}]
-    //             });
-    //         let testUser = new User({ id: 1, username: 'Test User', email: 'kakarrot@go.ku', password_digest: 'aafadnthpqbsbapbb784' })
-    //         const habits = await testUser.habits;
-    //         expect(habits).toHaveLength(2)
-    //         expect(habits[0]).toHaveProperty('path', '/habits/1')
-    //     })
-    // });
-
+    describe('habits', () => {
+        test('it resolves with formatted habits on successful db query', async () => {
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ 
+                    rows: [{id: 1, habit_name: 'habit1', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1 }, {id: 2, habit_name: 'habit2', habit_description: 'walking 30 min daily', habit_frequency: 'daily', frequency_target: 4, user_id: 1}]
+                });
+            let testUser = new User({ id: 1, username: 'Test User', email: 'kakarrot@go.ku', password_digest: 'aafadnthpqbsbapbb784' })
+            const habits = await testUser.habits;
+            expect(habits).toHaveLength(2)
+            // expect(habits[0]).toHaveProperty('user_id', 1)
+    });
+})
     // describe('destroy', () => {
     //     test('it resolves with message on successful db query', async () => {
     //         jest.spyOn(db, 'query')

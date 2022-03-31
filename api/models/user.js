@@ -4,7 +4,7 @@ class User {
 	constructor(data) {
 		this.id = data.id;
 		this.email = data.email;
-		this.userName = data.username;
+		this.username = data.username;
 		this.password= data.password_digest;
 	}
 

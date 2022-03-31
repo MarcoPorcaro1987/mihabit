@@ -89,7 +89,7 @@ class Habit {
 	}
 
 	//delete a habit
-	destroyHabit() {
+	destroy() {
 		return new Promise(async (resolve, reject) => {
 			try {
 				await db.query(`DELETE FROM completions WHERE habit_id = $1;`, [this.id]);
@@ -101,7 +101,7 @@ class Habit {
 		});
 	}
 
- 
+}
 module.exports = Habit;
 
 
