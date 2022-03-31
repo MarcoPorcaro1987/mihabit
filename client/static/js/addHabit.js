@@ -10,7 +10,7 @@ modal.addEventListener('submit', submitHabit);// or postHabit !!! i'm not sure w
 function navbar() {
     const logoutBtn = document.querySelector('.logout-button');
     logoutBtn.addEventListener('click', logout)
-
+}
 
     function submitHabit(e) {
         e.preventDefault();
@@ -152,7 +152,7 @@ function navbar() {
         } catch (err) {
             console.warn(err);
         }
-    }}
+    }
 
     //must be exported!!
 
