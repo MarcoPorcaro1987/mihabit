@@ -7,7 +7,7 @@ const bycrypt = require('bcryptjs')
 // const { user } = require('pg/lib/defaults')
 
 
-const { verifyToken } = require('../middleware/middleware');
+//const { verifyToken } = require('../middleware/middleware');
 // models import
 
 const User = require('../models/user')
