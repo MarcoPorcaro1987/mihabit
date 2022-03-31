@@ -139,11 +139,12 @@ async function displayHabits(habits) {
 
 
 
+
+
+function addHabit() {}
+
+
 function logout() {
     localStorage.clear();
-    location.hash = '../../index.html'
-}
-
-function addHabit() {
-
+    location.hash = '#login'
 }

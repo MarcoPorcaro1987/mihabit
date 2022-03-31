@@ -2,6 +2,7 @@ const loginForm = document.querySelector("#login-form")
 const formRegister = document.querySelector('#register-form')
 
 
+
 loginForm.addEventListener('submit', r => {
         r.preventDefault()
         const formData = {
@@ -66,6 +67,11 @@ async function registration(e){
 
 
 function login(data){
-    localStorage.setItem('username', data.user);
-    location.hash = '../../homepage.html';
+    localStorage.setItem('token', data.token)
+    let userInfo = jwt_decode(data.token);
+    console.log(userInfo)
+    localStorage.setItem('email', userInfo.email)
+    localStorage.setItem('username', userInfo.username);
+    window.location.replace("homepage.html")
 }
+
