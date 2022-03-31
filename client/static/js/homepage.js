@@ -5,10 +5,23 @@ const userId = localStorage.getItem('userId') //???
 
 function navbar() {
     const logoutBtn = document.querySelector('.logout-button');
-    const addHabitBtn = document.querySelector('#addbtn')
+    // const addHabitBtn = document.querySelector('#addbtn')
+    const homepageBtn = document.querySelector('#logo-Mihabit')
     logoutBtn.addEventListener('click', logout)
-    addHabitBtn.addEventListener('click', addHabit) 
+    // addHabitBtn.addEventListener('click', addHabit) 
+    // homepageBtn.addEventListener('click', goHome)
 }
+
+
+// async function goHome() {
+//     window.location.replace("homepage.html")
+// }
+
+// async function addHabit() {
+//     window.location.replace("addHabit.html")
+// }
+
+
 
 async function loadHabits(id) {
 
@@ -140,8 +153,6 @@ async function displayHabits(habits) {
 
 
 
-
-function addHabit() {}
 
 
 function logout() {
