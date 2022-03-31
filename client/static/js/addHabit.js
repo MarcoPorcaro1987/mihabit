@@ -67,9 +67,7 @@ async function postHabit(habitData) {
 // };
 
 // function appendHabit(habitData){
-    // const newRow = document.createElement('tr');
-    // const dogLi = formatDogTr(dogData, newRow)
-    // dogsList.append(newRow);
+    
 
 
 
@@ -91,7 +89,7 @@ function addNewHabitHomepage(habitData) {
 }
 
 
-
+///?????
 
 submitButton.addEventListener("click", () => {
 	document.querySelector("#habitTitle").value = localStorage.setItem('habit_name');
