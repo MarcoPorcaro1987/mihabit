@@ -1,3 +1,6 @@
+const Habit = require("../../../api/models/habit");
+
+
 const modal = document.querySelector('#modal');
 const modalHeader = modal.querySelector('habitTitle');
 const modalContent = modal.querySelector('habitDescription');
@@ -15,8 +18,10 @@ async function submitHabit(e) {
         habit_description: e.target.habit_description.value,
         habit_frequency: e.target.habit_frequency.value,
         frequency_target: e.target.frequency_target.value,
-        // user: e.target.user_id.value
+        
+        // user: `${user.id}`
     };
+    console.log(`${Habit}`)
     console.log(datahabit)
     const options = {
         method: 'POST',
@@ -128,7 +133,7 @@ function navbar() {
         try {
             const options = { headers: new Headers({ Authorization: localStorage.getItem('token') }) };
             const id = localStorage.getItem('id');
-            const url = `${devURL}/user/${id}/habits/${id}`; //i'm not sure that is working because of the 2 id's
+            const url = `${devURL}/user/${id}`; //i'm not sure that is working because of the 2 id's
             const response = await fetch(url, options);
             const data = await response.json();
             if (data.err) {

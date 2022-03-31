@@ -21,6 +21,7 @@ class Habit {
 		this.currentCompletions = data.currentCompletions;
         this.completionDates = data.completionDates;
 		this.user = { path: `/users/${data.user_id}`};
+		this.user_id = `${data.user_id}`
 	}
 
 
@@ -36,23 +37,23 @@ class Habit {
         });
     };
 
-	static findById(id){
-        return new Promise (async (resolve, reject) => {
-            try {
-                let  habitData = await db.query(`SELECT habits.*, users.username as user_username
-                                                FROM habits 
-                                                INNER JOIN users
-                                                ON habits.user_id = users.id
-                                                WHERE habits.id = $1;`, [ id ]);
-                let habit = new Habit( habitData.rows[0]);
-                resolve (habit);
-            } catch (err) {
-                reject('Habit not found');
-            }
-        });
-    };
+	// static findById(id){
+    //     return new Promise (async (resolve, reject) => {
+    //         try {
+    //             let  habitData = await db.query(`SELECT habits.*, 
+    //                                             FROM habits 
+    //                                             INNER JOIN users
+    //                                             ON habits.user_id = users.id
+    //                                             WHERE habits.id = $1;`, [ id ]);
+    //             let habit = new Habit( habitData.rows[0]);
+    //             resolve (habit);
+    //         } catch (err) {
+    //             reject('Habit not found');
+    //         }
+    //     });
+    // };
 
-    static findByUser (id) {
+    static findById(id) {
         return new Promise (async (resolve, reject) => {
             try {
                 let habitsData = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [ id ]);
